@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.tullo</groupId>
+    <artifactId>1password-server</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
+
+    <name>1Password-Server</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jetty8-version>8.1.8.v20121106</jetty8-version>
+        <jetty9-version>9.0.5.v20130815</jetty9-version>
+    </properties>
+
+    <dependencies/>
+
+    <build>
+        <finalName>1password-server</finalName>
+        <plugins>
+            <!-- v8.x http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
+            <!-- v9.x http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty9-version}</version>
+                <configuration>
+                    <webAppSourceDirectory>/home/anda/Dropbox/1Password/1Password.agilekeychain</webAppSourceDirectory>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <httpConnector >
+                        <port>8088</port>
+                        <idleTimeout>60000</idleTimeout>
+                    </httpConnector>
+                    <!--jettyXml>jetty.xml,jetty-http.xml,jetty-ssl.xml,jetty-https.xml</jettyXml-->
+                    <stopPort>9966</stopPort>
+                    <stopKey>foo</stopKey>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start-jetty</id>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <daemon>true</daemon>
+                            <reload>manual</reload>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles/>
+
+</project>
