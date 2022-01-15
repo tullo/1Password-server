@@ -27,7 +27,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty9-version}</version>
                 <configuration>
-                    <webAppSourceDirectory>/home/anda/Dropbox/1Password/1Password.agilekeychain</webAppSourceDirectory>
+                    <webAppSourceDirectory>${HOME}/Dropbox/1Password/1Password.agilekeychain</webAppSourceDirectory>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <httpConnector >
                         <port>8088</port>
