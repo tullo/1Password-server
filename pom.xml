@@ -11,8 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jetty8-version>8.1.8.v20121106</jetty8-version>
-        <jetty9-version>11.0.14</jetty9-version>
+        <jetty-version>11.0.14</jetty-version>
     </properties>
 
     <dependencies/>
@@ -20,32 +19,30 @@
     <build>
         <finalName>1password-server</finalName>
         <plugins>
-            <!-- v8.x http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin -->
-            <!-- v9.x http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
+            <!-- https://www.eclipse.org/jetty/documentation/jetty-11/programming-guide/index.html#jetty-maven-plugin -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty9-version}</version>
+                <version>${jetty-version}</version>
                 <configuration>
-                    <webAppSourceDirectory>${HOME}/Dropbox/1Password/1Password.agilekeychain</webAppSourceDirectory>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <scan>10</scan>
                     <httpConnector >
                         <port>8088</port>
                         <idleTimeout>60000</idleTimeout>
                     </httpConnector>
-                    <!--jettyXml>jetty.xml,jetty-http.xml,jetty-ssl.xml,jetty-https.xml</jettyXml-->
                     <stopPort>9966</stopPort>
                     <stopKey>foo</stopKey>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>start-jetty</id>
+                        <id>run-jetty</id>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
                             <daemon>true</daemon>
                             <reload>manual</reload>
+                            <resourceBases>${HOME}/Dropbox/1Password/1Password.agilekeychain</resourceBases>
                         </configuration>
                     </execution>
                     <execution>
